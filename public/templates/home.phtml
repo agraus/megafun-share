@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html lang="eng">
 <head>	
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<meta name="Megafun file-sharing site">
 	<title>Megafun-share</title>
-	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="/css/pure.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<div class="jumbotron bg-danger text-primary">
-		<h2 class="display-4">Megafun is fun.</h2>
-	</div>
+<h1>Megafun-share</h1>
+<hr>
+<form action="<?php $_SERVER['PHP_SELF']?>">
+	Select your file:
+	<input type="file" name="file">
+	<input type="submit" value="Upload">
+</form>
+
+</div>
 </body>
 </html>
