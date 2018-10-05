@@ -1,7 +1,7 @@
 <?php
 abstract class DirectoryHelper
 {
-	static function getUploadDirectory():string
+	public static function getUploadDirectory():string
 	{
 		$year = date('Y');
 		$month = date('m');

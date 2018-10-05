@@ -69,6 +69,9 @@ class ComposerStaticInit9cc6e8646326ce1c947d90b9b6164187
     );
 
     public static $classMap = array (
+        'ComposerAutoloaderInit9cc6e8646326ce1c947d90b9b6164187' => __DIR__ . '/..' . '/composer/autoload_real.php',
+        'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
+        'Composer\\Autoload\\ComposerStaticInit9cc6e8646326ce1c947d90b9b6164187' => __DIR__ . '/..' . '/composer/autoload_static.php',
         'DirectoryHelper' => __DIR__ . '/../..' . '/src/directoryhelper.php',
         'FastRoute\\BadRouteException' => __DIR__ . '/..' . '/nikic/fast-route/src/BadRouteException.php',
         'FastRoute\\DataGenerator' => __DIR__ . '/..' . '/nikic/fast-route/src/DataGenerator.php',
@@ -79,17 +82,27 @@ class ComposerStaticInit9cc6e8646326ce1c947d90b9b6164187
         'FastRoute\\DataGenerator\\RegexBasedAbstract' => __DIR__ . '/..' . '/nikic/fast-route/src/DataGenerator/RegexBasedAbstract.php',
         'FastRoute\\Dispatcher' => __DIR__ . '/..' . '/nikic/fast-route/src/Dispatcher.php',
         'FastRoute\\Dispatcher\\CharCountBased' => __DIR__ . '/..' . '/nikic/fast-route/src/Dispatcher/CharCountBased.php',
+        'FastRoute\\Dispatcher\\CharCountBasedTest' => __DIR__ . '/..' . '/nikic/fast-route/test/Dispatcher/CharCountBasedTest.php',
+        'FastRoute\\Dispatcher\\DispatcherTest' => __DIR__ . '/..' . '/nikic/fast-route/test/Dispatcher/DispatcherTest.php',
         'FastRoute\\Dispatcher\\GroupCountBased' => __DIR__ . '/..' . '/nikic/fast-route/src/Dispatcher/GroupCountBased.php',
+        'FastRoute\\Dispatcher\\GroupCountBasedTest' => __DIR__ . '/..' . '/nikic/fast-route/test/Dispatcher/GroupCountBasedTest.php',
         'FastRoute\\Dispatcher\\GroupPosBased' => __DIR__ . '/..' . '/nikic/fast-route/src/Dispatcher/GroupPosBased.php',
+        'FastRoute\\Dispatcher\\GroupPosBasedTest' => __DIR__ . '/..' . '/nikic/fast-route/test/Dispatcher/GroupPosBasedTest.php',
         'FastRoute\\Dispatcher\\MarkBased' => __DIR__ . '/..' . '/nikic/fast-route/src/Dispatcher/MarkBased.php',
+        'FastRoute\\Dispatcher\\MarkBasedTest' => __DIR__ . '/..' . '/nikic/fast-route/test/Dispatcher/MarkBasedTest.php',
         'FastRoute\\Dispatcher\\RegexBasedAbstract' => __DIR__ . '/..' . '/nikic/fast-route/src/Dispatcher/RegexBasedAbstract.php',
+        'FastRoute\\DummyRouteCollector' => __DIR__ . '/..' . '/nikic/fast-route/test/RouteCollectorTest.php',
+        'FastRoute\\HackTypecheckerTest' => __DIR__ . '/..' . '/nikic/fast-route/test/HackTypechecker/HackTypecheckerTest.php',
         'FastRoute\\Route' => __DIR__ . '/..' . '/nikic/fast-route/src/Route.php',
         'FastRoute\\RouteCollector' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteCollector.php',
+        'FastRoute\\RouteCollectorTest' => __DIR__ . '/..' . '/nikic/fast-route/test/RouteCollectorTest.php',
         'FastRoute\\RouteParser' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteParser.php',
         'FastRoute\\RouteParser\\Std' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteParser/Std.php',
+        'FastRoute\\RouteParser\\StdTest' => __DIR__ . '/..' . '/nikic/fast-route/test/RouteParser/StdTest.php',
         'Interop\\Container\\ContainerInterface' => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container/ContainerInterface.php',
         'Interop\\Container\\Exception\\ContainerException' => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container/Exception/ContainerException.php',
         'Interop\\Container\\Exception\\NotFoundException' => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container/Exception/NotFoundException.php',
+        'PhpRendererTest' => __DIR__ . '/..' . '/slim/php-view/tests/PhpRendererTest.php',
         'Pimple\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Container.php',
         'Pimple\\Exception\\ExpectedInvokableException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/ExpectedInvokableException.php',
         'Pimple\\Exception\\FrozenServiceException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/FrozenServiceException.php',
@@ -166,6 +179,7 @@ class ComposerStaticInit9cc6e8646326ce1c947d90b9b6164187
         'Slim\\RouteGroup' => __DIR__ . '/..' . '/slim/slim/Slim/RouteGroup.php',
         'Slim\\Router' => __DIR__ . '/..' . '/slim/slim/Slim/Router.php',
         'Slim\\Views\\PhpRenderer' => __DIR__ . '/..' . '/slim/php-view/src/PhpRenderer.php',
+        'UploadHelper' => __DIR__ . '/../..' . '/src/uploadhelper.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
