@@ -6,18 +6,25 @@ abstract class UploadHelper
 		$tmp_name = $file['tmp_name'];
 		$name = $file['name'];
 		$size = $file['size'];
+		$type = $file['type'];
 		if(strlen($name) > 180)
 		{
 			return "Name can't be longer than 180 characters";
 		}
-		$new_name = random_int(1, 9999999999) .'.' .pathinfo($name, PATHINFO_EXTENSION);
+		$new_name = random_int(1, 9999999999);
 		if(strstr($file['type'], 'image'))
 		{
-			self::makeFilePreview($tmp_name, $file['type'],$new_name);
+			self::makeFilePreview($tmp_name, $type, $new_name);
 		}
-		if(move_uploaded_file($tmp_name, $directory .$new_name))
+		if(move_uploaded_file($tmp_name, $directory .$new_name .'.txt'))
 		{
-			return "File uploaded";
+			$db_array = [
+				'orig_name' => $name,
+				'name' => $new_name,
+				'path' => $directory,
+				'mime_type' => $type
+				];
+			return $db_array;
 		}
 		else
 		{
@@ -55,10 +62,10 @@ abstract class UploadHelper
 		imagecopyresampled($image_preview, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 		switch($type)
 		{
-    		case 'image/bmp': imagewbmp($image_preview, __DIR__ ."/../public/previews/" .$filename); break;
-    		case 'image/gif': imagegif($image_preview,  __DIR__ ."/../public/previews/" .$filename); break;
-    		case 'image/jpeg': imagejpeg($image_preview,  __DIR__ ."/../public/previews/" .$filename); break;
-    		case 'image/png': imagepng($image_preview,  __DIR__ ."/../public/previews/" .$filename); break;
+    		case 'image/bmp': imagewbmp($image_preview, __DIR__ ."/../public/previews/" .$filename .'.bmp'); break;
+    		case 'image/gif': imagegif($image_preview,  __DIR__ ."/../public/previews/" .$filename .'.gif'); break;
+    		case 'image/jpeg': imagejpeg($image_preview,  __DIR__ ."/../public/previews/" .$filename .'.jpg'); break;
+    		case 'image/png': imagepng($image_preview,  __DIR__ ."/../public/previews/" .$filename .'.png'); break;
   		}
 	}
 }
