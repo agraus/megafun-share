@@ -100,6 +100,7 @@ class ComposerStaticInit9cc6e8646326ce1c947d90b9b6164187
         'FastRoute\\RouteParser\\Std' => __DIR__ . '/..' . '/nikic/fast-route/src/RouteParser/Std.php',
         'FastRoute\\RouteParser\\StdTest' => __DIR__ . '/..' . '/nikic/fast-route/test/RouteParser/StdTest.php',
         'FileClass' => __DIR__ . '/../..' . '/src/fileclass.php',
+        'FileMapper' => __DIR__ . '/../..' . '/src/filemapper.php',
         'Interop\\Container\\ContainerInterface' => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container/ContainerInterface.php',
         'Interop\\Container\\Exception\\ContainerException' => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container/Exception/ContainerException.php',
         'Interop\\Container\\Exception\\NotFoundException' => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container/Exception/NotFoundException.php',

@@ -37,6 +37,7 @@ return array(
     'FastRoute\\RouteParser\\Std' => $vendorDir . '/nikic/fast-route/src/RouteParser/Std.php',
     'FastRoute\\RouteParser\\StdTest' => $vendorDir . '/nikic/fast-route/test/RouteParser/StdTest.php',
     'FileClass' => $baseDir . '/src/fileclass.php',
+    'FileMapper' => $baseDir . '/src/filemapper.php',
     'Interop\\Container\\ContainerInterface' => $vendorDir . '/container-interop/container-interop/src/Interop/Container/ContainerInterface.php',
     'Interop\\Container\\Exception\\ContainerException' => $vendorDir . '/container-interop/container-interop/src/Interop/Container/Exception/ContainerException.php',
     'Interop\\Container\\Exception\\NotFoundException' => $vendorDir . '/container-interop/container-interop/src/Interop/Container/Exception/NotFoundException.php',

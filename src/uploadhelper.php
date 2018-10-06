@@ -1,7 +1,7 @@
 <?php
 abstract class UploadHelper
 {
-	public static function saveFile(FileClass $file, string $directory)
+	public static function saveFile(FileClass $file, FileMapper $mapper, string $directory)
 	{
 		$properties = $file -> getFileProperties();
 		if(strlen($properties['name']) > 180)
@@ -14,6 +14,7 @@ abstract class UploadHelper
 		}
 		if(move_uploaded_file($properties['tmp_name'], $directory .$properties['new_name'] .'.txt'))
 		{
+			$mapper -> saveFile($file, $directory);
 			return 'File uploaded';
 		}
 		else
