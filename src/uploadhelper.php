@@ -1,7 +1,7 @@
 <?php
 abstract class UploadHelper
 {
-	public static function saveFile(FileClass $file, FileMapper $mapper, string $directory)
+	public static function saveFile(FileClass $file, FileMapper $mapper, array $directory)
 	{
 		$properties = $file -> getFileProperties();
 		if(strlen($properties['name']) > 180)
@@ -10,9 +10,9 @@ abstract class UploadHelper
 		}
 		if(strstr($properties['type'], 'image'))
 		{
-			self::makeFilePreview($properties['tmp_name'], $properties['type'], $properties['new_name']);
+			self::makeFilePreview($properties['tmp_name'], $properties['type'], $properties['new_name'], $directory);
 		}
-		if(move_uploaded_file($properties['tmp_name'], $directory .$properties['new_name'] .'.txt'))
+		if(move_uploaded_file($properties['tmp_name'], $directory['file'] .$properties['new_name'] .'.txt'))
 		{
 			$mapper -> saveFile($file, $directory);
 			return 'File uploaded';
@@ -22,7 +22,7 @@ abstract class UploadHelper
 			return"Upload failed";
 		}
 	}
-	private static function makeFilePreview(string $file, string $type, string $filename)
+	private static function makeFilePreview(string $file, string $type, string $filename, array $directory)
 	{
 		$width = 800;
 		$height = 600;
@@ -53,10 +53,10 @@ abstract class UploadHelper
 		imagecopyresampled($image_preview, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 		switch($type)
 		{
-    		case 'image/bmp': imagewbmp($image_preview, __DIR__ ."/../public/previews/" .$filename .'.bmp'); break;
-    		case 'image/gif': imagegif($image_preview,  __DIR__ ."/../public/previews/" .$filename .'.gif'); break;
-    		case 'image/jpeg': imagejpeg($image_preview,  __DIR__ ."/../public/previews/" .$filename .'.jpg'); break;
-    		case 'image/png': imagepng($image_preview,  __DIR__ ."/../public/previews/" .$filename .'.png'); break;
+    		case 'image/bmp': imagewbmp($image_preview, $directory['preview'] .$filename .'.bmp'); break;
+    		case 'image/gif': imagegif($image_preview,  $directory['preview'] .$filename .'.gif'); break;
+    		case 'image/jpeg': imagejpeg($image_preview,  $directory['preview'] .$filename .'.jpg'); break;
+    		case 'image/png': imagepng($image_preview,  $directory['preview'] .$filename .'.png'); break;
   		}
 	}
 }

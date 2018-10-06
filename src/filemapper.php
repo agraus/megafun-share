@@ -14,21 +14,26 @@ class FileMapper
 		}
 		$this -> mysqli -> set_charset('utf-8mb4');
 	}
-	public function saveFile(FileClass $file, string $path)
+	public function saveFile(FileClass $file, array $directory)
 	{
 		$properties = $file -> getFileProperties();
+		if(!strstr($properties['type'], 'image'))
+		{
+			$directory['preview'] = NULL;
+		}
 		$this -> dbConnect();
 		$stmt = $this -> mysqli -> prepare(
 			"INSERT INTO megafun 
 			(orig_name, 
 			name, 
-			`path`, 
+			`path`,
+			preview_path, 
 			mime_type, 
 			upload_date
 			)
-			VALUES(?,?,?,?,CURRENT_TIMESTAMP())"
+			VALUES(?,?,?,?,?,CURRENT_TIMESTAMP())"
 			);
-		$stmt -> bind_param('ssss', $properties['name'], $properties['new_name'], $path, $properties['type']);
+		$stmt -> bind_param('sssss', $properties['name'], $properties['new_name'], $directory['file'],$directory['preview'], $properties['type']);
 		$stmt -> execute();
 		echo $this -> mysqli -> error;
 		$this -> mysqli -> close() ;
