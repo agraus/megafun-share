@@ -15,7 +15,7 @@ $app->get('/', function ($request, $response) {
     return $response;
 });
 $app->post('/', function ($request, $response) {
-	$file = new FileClass($_FILES['file']);
+	$file = new FileClass($_FILES['file'],$_POST['commentary']);
 	$mapper = new FileMapper();
 	$error = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
 	var_dump($error);

@@ -6,13 +6,15 @@ class FileClass
 	private $size;
 	private $type;
 	private $tmp_name;
-	public function __construct(array $file)
+	private $commentary;
+	public function __construct(array $file, string $commentary)
 	{
 		$this -> name = $file['name'];
 		$this -> new_name = random_int(1, 9999999999);
 		$this -> size = $file['size'];
 		$this -> type = $file['type'];
 		$this -> tmp_name = $file['tmp_name'];
+		$this -> commentary = trim($commentary);
 	}
 	public function getFileProperties():array
 	{
@@ -21,7 +23,8 @@ class FileClass
 			'new_name' => $this -> new_name,
 			'size' => $this -> size,
 			'type' => $this -> type,
-			'tmp_name' => $this -> tmp_name
+			'tmp_name' => $this -> tmp_name,
+			'commentary' => $this -> commentary
 		];
 		return $array;
 	}

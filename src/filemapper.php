@@ -28,12 +28,13 @@ class FileMapper
 			name, 
 			`path`,
 			preview_path, 
-			mime_type, 
+			mime_type,
+			commentary, 
 			upload_date
 			)
-			VALUES(?,?,?,?,?,CURRENT_TIMESTAMP())"
+			VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP())"
 			);
-		$stmt -> bind_param('sssss', $properties['name'], $properties['new_name'], $directory['file'],$directory['preview'], $properties['type']);
+		$stmt -> bind_param('ssssss', $properties['name'], $properties['new_name'], $directory['file'],$directory['preview'], $properties['type'], $properties['commentary']);
 		$stmt -> execute();
 		echo $this -> mysqli -> error;
 		$this -> mysqli -> close() ;
