@@ -8,9 +8,22 @@ abstract class UploadHelper
 		{
 			return "Name can't be longer than 180 characters";
 		}
+		if($properties['size'] > 52428800)
+		{
+			return "Maximum size is 50M";
+		}
 		if(strstr($properties['type'], 'image'))
 		{
 			self::makeFilePreview($properties['tmp_name'], $properties['type'], $properties['new_name'], $directory);
+			$metadata = MetadataHelper::getImageMetadata($properties['tmp_name']);
+		}
+		if(strstr($properties['type'],'audio'))
+		{
+			$metadata = MetadataHelper::getAudioMetadata($properties['tmp_name']);
+		}
+		if(strstr($properties['type'],'video'))
+		{
+			куегкт MetadataHelper::getVideoMetadata($properties['tmp_name']);
 		}
 		if(move_uploaded_file($properties['tmp_name'], $directory['file'] .$properties['new_name'] .'.txt'))
 		{
@@ -29,7 +42,7 @@ abstract class UploadHelper
 		switch($type)
 		{
     		case 'image/bmp': $image = imagecreatefrombmp($file); break;
-    		case 'image/gif': $image = imagecreatefromgif($file); break;
+    		case 'image/gif': $image = imagecreatefromgif($file);  break;
    		 	case 'image/jpeg': $image = imagecreatefromjpeg($file); break;
    			case 'image/png': $image = imagecreatefrompng($file); break;
  		}
