@@ -23,11 +23,11 @@ abstract class UploadHelper
 		}
 		if(strstr($properties['type'],'video'))
 		{
-			куегкт MetadataHelper::getVideoMetadata($properties['tmp_name']);
+			$metadata = MetadataHelper::getVideoMetadata($properties['tmp_name']);
 		}
 		if(move_uploaded_file($properties['tmp_name'], $directory['file'] .$properties['new_name'] .'.txt'))
 		{
-			$mapper -> saveFile($file, $directory);
+			$mapper -> saveFile($file, $directory, $metadata);
 			return 'File uploaded';
 		}
 		else

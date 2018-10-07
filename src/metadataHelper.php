@@ -31,4 +31,21 @@ abstract class MetadataHelper
 		];
 		return json_encode($metadata);
 	}
+	public static function getVideoMetadata(string $file)
+	{
+		$getID3 = new getID3();
+		$file_info = $getID3 -> analyze($file);
+		$metadata = [
+			'fileformat' => $file_info['fileformat'],
+			'bitrate' => $file_info['bitrate'],
+			'playtime' => $file_info['playtime_string'],
+			'resolution_x' => $file_info['video']['resolution_x'],
+			'resolution_y' => $file_info['video']['resolution_y'],
+			'title' => $file_info['tags']['title'],
+			'year' => $file_info['tags']['year'],
+			'codec' => $file_info['video']['codec'],
+			'encoder' => $file_info['video']['encoder']
+		];
+		return json_encode($metadata);
+	}
 }

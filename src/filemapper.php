@@ -14,7 +14,7 @@ class FileMapper
 		}
 		$this -> mysqli -> set_charset('utf-8mb4');
 	}
-	public function saveFile(FileClass $file, array $directory)
+	public function saveFile(FileClass $file, array $directory, string $metadata)
 	{
 		$properties = $file -> getFileProperties();
 		if(!strstr($properties['type'], 'image'))
@@ -29,12 +29,13 @@ class FileMapper
 			`path`,
 			preview_path, 
 			mime_type,
+			metadata,
 			commentary, 
 			upload_date
 			)
-			VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP())"
+			VALUES(?,?,?,?,?,?,?,CURRENT_TIMESTAMP())"
 			);
-		$stmt -> bind_param('ssssss', $properties['name'], $properties['new_name'], $directory['file'],$directory['preview'], $properties['type'], $properties['commentary']);
+		$stmt -> bind_param('sssssss', $properties['name'], $properties['new_name'], $directory['file'],$directory['preview'], $properties['type'], $metadata, $properties['commentary']);
 		$stmt -> execute();
 		echo $this -> mysqli -> error;
 		$this -> mysqli -> close() ;
