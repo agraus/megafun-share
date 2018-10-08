@@ -21,10 +21,17 @@ $app->post('/', function ($request, $response) {
 	var_dump($error);
 });
 $app->get('/{filename}', function ($request, $response, array $args) {
-	//$response = $this -> view -> render($response,'home.phtml');
 	$filename = $args['filename'];
 	$mapper = new FileMapper();
-    var_dump($mapper -> searchFile('name', $filename));
+    $data = $mapper -> searchFile('name', $filename);
+	if(isset($data))
+	{
+    	$response = $this -> view -> render($response,'filepage.phtml', $data);
+    }
+    else
+    {
+    	echo "file doesn't exist";
+    }
 });
 
 $app->run();

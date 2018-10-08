@@ -14,7 +14,7 @@ abstract class UploadHelper
 		}
 		if(strstr($properties['type'], 'image'))
 		{
-			self::makeFilePreview($properties['tmp_name'], $properties['type'], $properties['new_name'], $directory);
+			$directory['preview'] = self::makeFilePreview($properties['tmp_name'], $properties['type'], $properties['new_name'], $directory);
 			$metadata = MetadataHelper::getImageMetadata($properties['tmp_name']);
 		}
 		if(strstr($properties['type'],'audio'))
@@ -45,6 +45,7 @@ abstract class UploadHelper
     		case 'image/gif': $image = imagecreatefromgif($file);  break;
    		 	case 'image/jpeg': $image = imagecreatefromjpeg($file); break;
    			case 'image/png': $image = imagecreatefrompng($file); break;
+   			default : return NULL;
  		}
  		list($width_orig, $height_orig) = getimagesize($file);
 		$ratio_orig = $width_orig/$height_orig;
@@ -66,10 +67,13 @@ abstract class UploadHelper
 		imagecopyresampled($image_preview, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
 		switch($type)
 		{
-    		case 'image/bmp': imagewbmp($image_preview, $directory['preview'] .$filename .'.bmp'); break;
-    		case 'image/gif': imagegif($image_preview,  $directory['preview'] .$filename .'.gif'); break;
-    		case 'image/jpeg': imagejpeg($image_preview,  $directory['preview'] .$filename .'.jpg'); break;
-    		case 'image/png': imagepng($image_preview,  $directory['preview'] .$filename .'.png'); break;
+    		case 'image/bmp': $path = $directory['preview'] .$filename .'.bmp'; imagewbmp($image_preview, $path); break;
+    		case 'image/gif': $path = $directory['preview'] .$filename .'.gif'; imagegif($image_preview,  $path); break;
+    		case 'image/jpeg': $path = $directory['preview'] .$filename .'.jpg'; imagejpeg($image_preview,  $path); break;
+    		case 'image/png': $path = $directory['preview'] .$filename .'.png'; imagepng($image_preview,  $path); break;
   		}
+  		$path = explode('public/', $path);
+  		$path = $path[1];
+  		return $path;
 	}
 }

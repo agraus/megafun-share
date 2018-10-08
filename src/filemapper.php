@@ -56,7 +56,7 @@ class FileMapper
 				'path' => $col4,
 				'preview_path' => $col5,
 				'mime_type' => $col6,
-				'metadata' => $col7,
+				'metadata' => json_decode($col7,TRUE),
 				'commentary' => $col8,
 				'timestamp' => $col9
 			];

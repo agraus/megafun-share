@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="eng">
+<head>	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="Megafun file-sharing site">
+	<title><?= htmlspecialchars($data[0]['orig_name']) ?></title>
+	<link href="/css/pure.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Megafun-share</h1>
+<hr>
+<h2><?= htmlspecialchars($data[0]['orig_name']) ?></h2>
+<? if(!is_null($data[0]['preview_path'])): ?>
+<img src="../<?= htmlspecialchars($data[0]['preview_path']) ?>" alt="image preview">
+<? endif; ?>
+<hr>
+
+</body>
+</html>
