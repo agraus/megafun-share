@@ -61,6 +61,18 @@ class FileMapper
 				'timestamp' => $col9
 			];
 		}
+		foreach ($properties as $key => $value) 
+		{
+			if(!is_null($properties[$key]['metadata']))
+			{
+				foreach ($properties[$key]['metadata'][0] as $key2 => $value2) 
+				{
+					$properties[$key]['metadata'][$value2] = $properties[$key]['metadata'][1][$key2];
+				}
+				unset($properties[$key]['metadata'][0]);
+				unset($properties[$key]['metadata'][1]);
+			}
+		}
 		$this -> mysqli -> close();
 		return $properties;
 	}

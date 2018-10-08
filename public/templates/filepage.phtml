@@ -15,6 +15,23 @@
 <img src="../<?= htmlspecialchars($data[0]['preview_path']) ?>" alt="image preview">
 <? endif; ?>
 <hr>
-
+<table>
+	<tr>
+		<td>Upload date:</td>
+		<td><?= htmlspecialchars($data[0]['timestamp']) ?></td>
+	</tr>
+	<tr>
+		<td>File type:</td>
+		<td><?= htmlspecialchars($data[0]['mime_type']) ?></td>
+	</tr>
+	<? if(!is_null($data[0]['metadata'])): ?>
+	<? foreach($data[0]['metadata'] as $key => $value): ?>
+	<tr>
+		<td><?= htmlspecialchars($key) ?>:</td>
+		<td><?= htmlspecialchars($value) ?></td>
+	</tr>
+	<? endforeach; ?>
+	<? endif; ?>
+</table>
 </body>
 </html>
