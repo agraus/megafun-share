@@ -20,5 +20,11 @@ $app->post('/', function ($request, $response) {
 	$error = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
 	var_dump($error);
 });
+$app->get('/{filename}', function ($request, $response, array $args) {
+	//$response = $this -> view -> render($response,'home.phtml');
+	$filename = $args['filename'];
+	$mapper = new FileMapper();
+    var_dump($mapper -> searchFile('name', $filename));
+});
 
 $app->run();
