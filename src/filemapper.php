@@ -1,4 +1,6 @@
 <?php
+//Маппер, выполняющий всю работу с БД.
+
 class FileMapper
 {
 	private $dbinfo =  __DIR__ . "/../dbinfo_real.ini" ;
@@ -61,6 +63,9 @@ class FileMapper
 				'timestamp' => $col9
 			];
 		}
+		/* Преобразование массива-враппера, полученного из JSON
+		в изначальный массив метаданных. Порядок ключей сохраняется.
+		*/
 		foreach ($properties as $key => $value) 
 		{
 			if(!is_null($properties[$key]['metadata']))

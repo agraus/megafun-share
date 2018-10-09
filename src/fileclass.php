@@ -1,4 +1,6 @@
 <?php
+/*Класс, хранящий информацию о файле из $_FILES и $_POST
+для последющей передачи в БД */
 class FileClass
 {
 	private $name;

@@ -24,7 +24,7 @@ $app->get('/{filename}', function ($request, $response, array $args) {
 	$filename = $args['filename'];
 	$mapper = new FileMapper();
     $data = $mapper -> searchFile('name', $filename);
-	if(isset($data))
+	if(!empty($data))
 	{
     	$response = $this -> view -> render($response,'filepage.phtml', $data);
     }

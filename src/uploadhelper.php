@@ -1,6 +1,12 @@
 <?php
+/* Класс для обработки полученных в $_FILES и $_POST данных.
+Планируется добавить нормальную обработку ошибок при загрузке файла 
+*/
 abstract class UploadHelper
 {
+	/* Метод для сохранения файла и передачи ошибок
+	в случае проблем с сохранением файла
+	*/
 	public static function saveFile(FileClass $file, FileMapper $mapper, array $directory)
 	{
 		$properties = $file -> getFileProperties();
@@ -35,6 +41,10 @@ abstract class UploadHelper
 			return"Upload failed";
 		}
 	}
+	/* Метод для создания превью изображений.
+	Планируется сохранение анимации для превью в .gif
+	при помощи Image Magick
+	*/
 	private static function makeFilePreview(string $file, string $type, string $filename, array $directory)
 	{
 		$width = 800;
