@@ -23,16 +23,16 @@ abstract class MetadataHelper
 		$tag = array_keys($file_info['tags']);
 		$metadata = [
 			'Format' => $file_info['fileformat'],
-			'Bitrate' => $file_info['bitrate'],
+			'Bitrate' => $file_info['bitrate'] ."bit/s",
 			'Playtime' => $file_info['playtime_string'],
-			'Title' => (isset($file_info['tags'][$tag[0]]['title'][0]))? $file_info['tags'][$tag[0]]['title'][0]:"Unknown",
 			'Artist' => (isset($file_info['tags'][$tag[0]]['artist'][0]))? $file_info['tags'][$tag[0]]['artist'][0]:"Unknown",
+			'Title' => (isset($file_info['tags'][$tag[0]]['title'][0]))? $file_info['tags'][$tag[0]]['title'][0]:"Unknown",
 			'Album' => (isset($file_info['tags'][$tag[0]]['album'][0]))? $file_info['tags'][$tag[0]]['album'][0]:"Unknown",
 			'Year' => (isset($file_info['tags'][$tag[0]]['year'][0]))? $file_info['tags'][$tag[0]]['year'][0]:"Unknown",
 			'Codec' => (isset($file_info['audio']['codec']))? $file_info['audio']['codec']:"Unknown",
-			'Compression ratio' => (isset($file_info['audio']['comression_ratio']))? $file_info['audio']['comression_ratio']:"Unknown",
-			'Encoder' => (isset($file_info['audio']['encoder']))? $file_info['audio']['encoder']:"Unknown"
-		];
+			'Encoder' => (isset($file_info['audio']['encoder']))? $file_info['audio']['encoder']:"Unknown",
+			'Compression ratio' => (isset($file_info['audio']['comression_ratio']))? $file_info['audio']['comression_ratio']:"Unknown"
+			];
 		return MetadataHelper::wrapper($metadata);
 	}
 	public static function getImageMetadata(string $file)
@@ -52,14 +52,12 @@ abstract class MetadataHelper
 		$file_info = $getID3 -> analyze($file);
 		$metadata = [
 			'Format' => $file_info['fileformat'],
-			'Bitrate' => $file_info['bitrate'],
+			'Bitrate' => $file_info['bitrate'] ."bit/s",
 			'Playtime' => $file_info['playtime_string'],
 			'Width' => $file_info['video']['resolution_x'],
 			'Height' => $file_info['video']['resolution_y'],
-			'Title' => (isset($file_info['tags'][$tag[0]]['title'][0]))? $file_info['tags'][$tag[0]]['title'][0]:"Unknown",
-			'Year' => (isset($file_info['tags'][$tag[0]]['year'][0]))? $file_info['tags'][$tag[0]]['year'][0]:"Unknown",
-			'Codec' => (isset($file_info['audio']['codec']))? $file_info['audio']['codec']:"Unknown",
-			'Encoder' => (isset($file_info['audio']['encoder']))? $file_info['audio']['encoder']:"Unknown"
+			'Codec' => (isset($file_info['video']['codec']))? $file_info['video']['codec']:"Unknown",
+			'Encoder' => (isset($file_info['vide']['encoder']))? $file_info['video']['encoder']:"Unknown"
 		];
 		return MetadataHelper::wrapper($metadata);
 	}

@@ -15,6 +15,10 @@
 <img src="../<?= htmlspecialchars($data[0]['preview_path']) ?>" alt="image preview">
 <? endif; ?>
 <hr>
+<? if(!empty($data[0]['commentary'])): ?>
+<p><?= $data[0]['commentary'] ?></p>
+<? endif; ?>
+<hr>
 <table>
 	<tr>
 		<td>Upload date:</td>

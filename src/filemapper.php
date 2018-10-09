@@ -11,8 +11,7 @@ class FileMapper
 		$this -> mysqli = new mysqli($db['host'], $db['user'], $db['password'], $db['database']);
 		if (mysqli_connect_errno()) 
 		{
-    		echo mysqli_connect_error();
-    		exit();
+    		Throw new Exception(mysqli_connect_error());
 		}
 		$this -> mysqli -> set_charset('utf-8mb4');
 	}

@@ -17,8 +17,16 @@ $app->get('/', function ($request, $response) {
 $app->post('/', function ($request, $response) {
 	$file = new FileClass($_FILES['file'],$_POST['commentary']);
 	$mapper = new FileMapper();
+	try
+	{
 	$error = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
 	var_dump($error);
+	}
+	catch(Exception $e)
+	{
+		$data[] = $e->getMessage();
+		$response = $this -> view -> render($response,'home.phtml', $data);
+	}
 });
 $app->get('/{filename}', function ($request, $response, array $args) {
 	$filename = $args['filename'];

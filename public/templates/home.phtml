@@ -10,6 +10,10 @@
 <body>
 <h1>Megafun-share</h1>
 <hr>
+<? if(isset($data[0])): ?>
+	<h3><?= htmlspecialchars($data[0]) ?></h3>
+	<hr>
+<? endif; ?>
 <form action="<?php $_SERVER['PHP_SELF']?>" enctype="multipart/form-data" method="POST">
 	Select your file:
 	<input type="file" name="file">

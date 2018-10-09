@@ -10,13 +10,13 @@ abstract class UploadHelper
 	public static function saveFile(FileClass $file, FileMapper $mapper, array $directory)
 	{
 		$properties = $file -> getFileProperties();
-		if(strlen($properties['name']) > 180)
-		{
-			return "Name can't be longer than 180 characters";
-		}
 		if($properties['size'] > 52428800)
 		{
-			return "Maximum size is 50M";
+			throw new Exception("Maximum size is 50M");
+		}
+		if(strlen($properties['name']) > 180)
+		{
+			throw new Exception("Name can't be longer than 180 characters");
 		}
 		if(strstr($properties['type'], 'image'))
 		{
@@ -34,11 +34,12 @@ abstract class UploadHelper
 		if(move_uploaded_file($properties['tmp_name'], $directory['file'] .$properties['new_name'] .'.txt'))
 		{
 			$mapper -> saveFile($file, $directory, $metadata);
-			return 'File uploaded';
+			$result = "{$properties['name']} uploaded: http://megafun:8080/{$properties['new_name']}";
+			return $result;
 		}
 		else
 		{
-			return"Upload failed";
+			throw new Exception("Upload failed");
 		}
 	}
 	/* Метод для создания превью изображений.
