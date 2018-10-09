@@ -19,8 +19,8 @@ $app->post('/', function ($request, $response) {
 	$mapper = new FileMapper();
 	try
 	{
-	$error = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
-	var_dump($error);
+	$data = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
+	$response = $this -> view -> render($response,'success.phtml', $data);
 	}
 	catch(Exception $e)
 	{
@@ -38,7 +38,7 @@ $app->get('/{filename}', function ($request, $response, array $args) {
     }
     else
     {
-    	echo "file doesn't exist";
+    	echo "file not found"
     }
 });
 

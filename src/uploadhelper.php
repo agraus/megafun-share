@@ -34,8 +34,7 @@ abstract class UploadHelper
 		if(move_uploaded_file($properties['tmp_name'], $directory['file'] .$properties['new_name'] .'.txt'))
 		{
 			$mapper -> saveFile($file, $directory, $metadata);
-			$result = "{$properties['name']} uploaded: http://megafun:8080/{$properties['new_name']}";
-			return $result;
+			return $properties;
 		}
 		else
 		{
