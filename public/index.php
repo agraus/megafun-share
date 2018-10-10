@@ -38,8 +38,28 @@ $app->get('/{filename}', function ($request, $response, array $args) {
     }
     else
     {
-    	echo "file not found"
+    	echo "file not found" ;
     }
 });
+$app->post('/{filename}', function ($request, $response, array $args) {
+	$filename = $args['filename'];
+	$mapper = new FileMapper();
+    $data = $mapper -> searchFile('name', $filename);
+	if(!empty($data))
+	{
+		$file = $data[0]['path'] .$data[0]['name'] .'.txt';
+		if(file_exists($file))
+		{
+			header('Content-Description: File Transfer');
+    		header('Content-Type: ' .$data[0]['mime_type']);
+    		header('Content-Disposition: attachment; filename="'.$data[0]['orig_name'].'"');
+    		header('Expires: 0');
+    		header('Cache-Control: must-revalidate');
+    		header('Pragma: public');
+    		header('Content-Length: ' .filesize($file));
+    		readfile($file);
+		}
+	}
 
+});
 $app->run();
