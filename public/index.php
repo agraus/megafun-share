@@ -19,26 +19,26 @@ $app->post('/', function ($request, $response) {
 	$mapper = new FileMapper();
 	try
 	{
-	$data = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
-	$response = $this -> view -> render($response,'success.phtml', $data);
+	$success = UploadHelper::saveFile($file, $mapper, DirectoryHelper::getUploadDirectory());	
+	$response = $this -> view -> render($response,'home.phtml', ['success' => $success]);
 	}
 	catch(Exception $e)
 	{
-		$data[] = $e->getMessage();
-		$response = $this -> view -> render($response,'home.phtml', $data);
+		$error[] = $e->getMessage();
+		$response = $this -> view -> render($response,'home.phtml', ['error' => $error]);
 	}
 });
 $app->get('/{filename}', function ($request, $response, array $args) {
 	$filename = $args['filename'];
 	$mapper = new FileMapper();
-    $data = $mapper -> searchFile('name', $filename);
-	if(!empty($data))
+    $properties = $mapper -> searchFile('name', $filename);
+	if(!empty($properties))
 	{
-    	$response = $this -> view -> render($response,'filepage.phtml', $data);
+    	$response = $this -> view -> render($response,'home.phtml', ['properties' => $properties]);
     }
     else
     {
-    	echo "file not found" ;
+    	$response = $this -> view -> render($response,'home.phtml',['not_found' => 1]);
     }
 });
 $app->post('/{filename}', function ($request, $response, array $args) {

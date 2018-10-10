@@ -4,26 +4,70 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<meta name="Megafun file-sharing site">
-	<title>Megafun-share</title>
+	<? if(isset($data['properties'])): ?>
+		<title><?= htmlspecialchars($data['properties'][0]['orig_name']) ?></title>
+	<? elseif(isset($data['success'])): ?>
+		<meta http-equiv="refresh" content="3;<?= $data['success']['new_name'] ?>" >
+		<title>Successfull upload</title> 
+	<? else: ?>
+		<title>Megafun-share</title>
+	<? endif; ?>
+
 	<link href="/css/pure.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>Megafun-share</h1>
 <hr>
-<? if(isset($data[0])): ?>
-	<h3><?= htmlspecialchars($data[0]) ?></h3>
+<? if(isset($data['properties'])): ?>
+	<h2><?= htmlspecialchars($data['properties'][0]['orig_name']) ?></h2>
+	<form action="<?php $_SERVER['PHP_SELF']?>" method="POST">
+		<input type="submit" value="Download">
+	</form>
+	<? if(!is_null($data['properties'][0]['preview_path'])): ?>
+		<img src="../<?= htmlspecialchars($data['properties'][0]['preview_path']) ?>" alt="image preview">
+	<? endif; ?>
 	<hr>
+	<? if(!empty($data['properties'][0]['commentary'])): ?>
+		<p><?= $data['properties'][0]['commentary'] ?></p>
+	<? endif; ?>
+	<hr>
+	<table>
+		<tr>
+			<td>Upload date:</td>
+			<td><?= htmlspecialchars($data['properties'][0]['timestamp']) ?></td>
+		</tr>
+		<tr>
+			<td>File type:</td>
+			<td><?= htmlspecialchars($data['properties'][0]['mime_type']) ?></td>
+		</tr>
+		<? if(!is_null($data['properties'][0]['metadata'])): ?>
+			<? foreach($data['properties'][0]['metadata'] as $key => $value): ?>
+			<tr>
+				<td><?= htmlspecialchars($key) ?>:</td>
+				<td><?= htmlspecialchars($value) ?></td>
+			</tr>
+			<? endforeach; ?>
+		<? endif; ?>
+	</table>
+<? elseif(isset($data['success'])): ?>
+	<h2>File <?= $data['success']['name'] ?> was successfully uploaded.</h2>
+<? elseif(isset($data['not_found'])): ?>
+	<h2>ERROR 404</h2>
+<? else: ?>
+	<? if(isset($data['error'][0])): ?>
+		<h3><?= htmlspecialchars($data['error'][0]) ?></h3>
+		<hr>
+	<? endif; ?>
+	<form action="<?php $_SERVER['PHP_SELF']?>" enctype="multipart/form-data" method="POST">
+		Select your file:
+		<input type="file" name="file">
+		<br>
+		Commentary:
+		<br>
+		<textarea cols="40" rows="8" maxlength="500" name='commentary'></textarea>
+		<hr>
+		<input type="submit" value="Upload">
+	</form>
 <? endif; ?>
-<form action="<?php $_SERVER['PHP_SELF']?>" enctype="multipart/form-data" method="POST">
-	Select your file:
-	<input type="file" name="file">
-	<br>
-	Commentary:
-	<br>
-	<textarea cols="40" rows="8" maxlength="500" name='commentary'></textarea>
-	<hr>
-	<input type="submit" value="Upload">
-</form>
-
 </body>
 </html>
