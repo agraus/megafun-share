@@ -29,38 +29,40 @@
         </ul>
     </div>
 </div>
-<hr>
 <? if(isset($data['properties'])): ?>
-	<h2><?= htmlspecialchars($data['properties'][0]['orig_name']) ?></h2>
-	<form action="<?php $_SERVER['PHP_SELF']?>" method="POST">
-		<input type="submit" value="Download">
-	</form>
-	<? if(!is_null($data['properties'][0]['preview_path'])): ?>
-		<img src="../<?= htmlspecialchars($data['properties'][0]['preview_path']) ?>" alt="image preview">
-	<? endif; ?>
-	<hr>
-	<? if(!empty($data['properties'][0]['commentary'])): ?>
-		<p><?= $data['properties'][0]['commentary'] ?></p>
-	<? endif; ?>
-	<hr>
-	<table>
-		<tr>
-			<td>Upload date:</td>
-			<td><?= htmlspecialchars($data['properties'][0]['timestamp']) ?></td>
-		</tr>
-		<tr>
-			<td>File type:</td>
-			<td><?= htmlspecialchars($data['properties'][0]['mime_type']) ?></td>
-		</tr>
-		<? if(!is_null($data['properties'][0]['metadata'])): ?>
-			<? foreach($data['properties'][0]['metadata'] as $key => $value): ?>
-			<tr>
-				<td><?= htmlspecialchars($key) ?>:</td>
-				<td><?= htmlspecialchars($value) ?></td>
-			</tr>
-			<? endforeach; ?>
-		<? endif; ?>
-	</table>
+	<div class="splash-container">
+    	<div class="splash">
+			<h1 class="splash-subhead"><?= htmlspecialchars($data['properties'][0]['orig_name']) ?></h1>
+			</form>
+			<? if(!is_null($data['properties'][0]['preview_path'])): ?>
+				<img src="../<?= htmlspecialchars($data['properties'][0]['preview_path']) ?>" alt="image preview">
+			<? endif; ?>
+			<? if(!empty($data['properties'][0]['commentary'])): ?>
+				<h2 class="splash-subhead-comment"><?= $data['properties'][0]['commentary'] ?></h2>
+			<? endif; ?>
+			<table class="pure-table-striped">
+				<tr>
+					<td>Upload date:</td>
+					<td><?= htmlspecialchars($data['properties'][0]['timestamp']) ?></td>
+				</tr>
+				<tr>
+					<td>File type:</td>
+					<td><?= htmlspecialchars($data['properties'][0]['mime_type']) ?></td>
+				</tr>
+				<? if(!is_null($data['properties'][0]['metadata'])): ?>
+					<? foreach($data['properties'][0]['metadata'] as $key => $value): ?>
+					<tr>
+						<td><?= htmlspecialchars($key) ?>:</td>
+						<td><?= htmlspecialchars($value) ?></td>
+					</tr>
+					<? endforeach; ?>
+				<? endif; ?>
+			</table>
+			<form action="<?php $_SERVER['PHP_SELF']?>" method="POST" class="pure-form">
+				<input type="submit" value="Download" class="pure-button pure-button-primary">
+			</form>
+		</div>
+	</div>
 <? elseif(isset($data['success'])): ?>
 	<div class="splash-container">
     	<div class="splash">
@@ -70,7 +72,6 @@
         	</p>
     	</div>
 	</div>
-	<!--<h2>File <?= $data['success']['name'] ?> was successfully uploaded.</h2>-->
 <? elseif(isset($data['not_found'])): ?>
 	<div class="splash">
 			<img src="images/Megaerror.png" class="pure-image">

@@ -85,6 +85,7 @@ label {
     color: white;
     padding: 0.5em 2em;
     border-radius: 5px;
+    font-weight: 600;
 }
 
 a.pure-button-primary {
@@ -190,6 +191,8 @@ a.pure-button-primary {
     font-family: courier new;
     margin-top: 30%;
     font-size: 200%;
+    word-wrap: break-word;
+    line-height: 1.2em;
     /*border-radius: 5px;*/
    /* line-height: 1em;*/
 }
@@ -220,8 +223,32 @@ a.pure-button-primary {
     letter-spacing: 0.05em;
     opacity: 0.8;
     color: #F6296A;
+    padding: 1em,0,1em,0;
 }
-
+.splash-subhead-comment {
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    color: #00AE52;
+    border: 2px solid #00AE52;
+    word-wrap: break-word;
+    line-height: 1.1em;
+    width: 70%;
+    margin: auto;
+}
+.splash table {
+    border-color: white;
+    margin: auto;
+    margin-top: 3em;
+    color: #F6296A;
+}
+.splash table tr:nth-child(odd) td {
+    background: #F6296A;
+    opacity: 0.7;
+    color: white;
+    
+}
 .pure-menu-link {
     font-size: 120%;
     font-weight: 700;
@@ -240,6 +267,7 @@ a.pure-button-primary {
     background: white;
 
 }
+
 
 /* We want to give the content area some more padding */
 .content {
