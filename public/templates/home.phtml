@@ -62,9 +62,23 @@
 		<? endif; ?>
 	</table>
 <? elseif(isset($data['success'])): ?>
-	<h2>File <?= $data['success']['name'] ?> was successfully uploaded.</h2>
+	<div class="splash-container">
+    	<div class="splash">
+        	<h1 class="splash-head-success">File <?= $data['success']['name'] ?> was successfully uploaded</h1>
+        	<p class="splash-subhead">
+        	    Redirecting to the file page
+        	</p>
+    	</div>
+	</div>
+	<!--<h2>File <?= $data['success']['name'] ?> was successfully uploaded.</h2>-->
 <? elseif(isset($data['not_found'])): ?>
-	<h2>ERROR 404</h2>
+	<div class="splash">
+			<img src="images/Megaerror.png" class="pure-image">
+        	<h1 class="splash-head-error">Error 404</h1>
+        	<p class="splash-subhead-error">
+        	    File doesn't exist
+        	</p>
+    	</div>
 <? else: ?>
 	<div class="splash-container">
     	<div class="splash">

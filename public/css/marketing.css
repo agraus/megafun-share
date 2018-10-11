@@ -180,7 +180,32 @@ a.pure-button-primary {
     /*border-radius: 5px;*/
    /* line-height: 1em;*/
 }
-
+.splash-head-success {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00AE52;
+    /*border: 3px solid white;*/
+    /*padding: 0.1em 1.6em;*/
+    font-weight: 700;
+    font-family: courier new;
+    margin-top: 30%;
+    font-size: 200%;
+    /*border-radius: 5px;*/
+   /* line-height: 1em;*/
+}
+.splash-head-error {
+    font-size: 20px;
+    font-weight: bold;
+    /*border: 3px solid white;*/
+    /*padding: 0.1em 1.6em;*/
+    font-weight: 700;
+    font-family: courier new;
+    margin-top: 5%;
+    font-size: 500%;
+    color: #F6296A;
+    /*border-radius: 5px;*/
+   /* line-height: 1em;*/
+}
 /* This is the subheading that appears on the blue section */
 .splash-subhead {
     font-weight: bold;
