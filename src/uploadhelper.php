@@ -42,8 +42,7 @@ abstract class UploadHelper
 		}
 	}
 	/* Метод для создания превью изображений.
-	Планируется сохранение анимации для превью в .gif
-	при помощи Image Magick
+	Анимированные gif делаются через Image magick.
 	*/
 	private static function makeFilePreview(string $file, string $type, string $filename, array $directory)
 	{
@@ -52,7 +51,7 @@ abstract class UploadHelper
 		switch($type)
 		{
     		case 'image/bmp': $image = imagecreatefrombmp($file); break;
-    		case 'image/gif': $image = imagecreatefromgif($file);  break;
+    		case 'image/gif': $image = new Imagick($file);  break;
    		 	case 'image/jpeg': $image = imagecreatefromjpeg($file); break;
    			case 'image/png': $image = imagecreatefrompng($file); break;
    			default : return NULL;
@@ -67,18 +66,32 @@ abstract class UploadHelper
 		{
    			$height = $width/$ratio_orig;
 		}
-		$image_preview = imagecreatetruecolor($width, $height);
-		if($type == "image/gif" or $type == "image/png")
+		if($type == "image/gif")
 		{
-    		imagecolortransparent($image_preview, imagecolorallocatealpha($image_preview, 0, 0, 0, 127));
-    		imagealphablending($image_preview, false);
-    		imagesavealpha($image_preview, true);
-  		}
-		imagecopyresampled($image_preview, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+			$image = $image->coalesceImages();
+			foreach ($image as $frame)
+			{ 
+ 				$frame->cropImage(0, 0, 0, 0); 
+ 				$frame->thumbnailImage($width/2, $height/2); 
+ 				$frame->setImagePage($width/2, $height/2, 0, 0); 
+			} 
+			$image = $image->deconstructImages(); 
+		} 
+		else
+		{
+			$image_preview = imagecreatetruecolor($width, $height);
+			if($type == "image/png")
+			{
+    			imagecolortransparent($image_preview, imagecolorallocatealpha($image_preview, 0, 0, 0, 127));
+    			imagealphablending($image_preview, false);
+    			imagesavealpha($image_preview, true);
+  			}
+			imagecopyresampled($image_preview, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+		}
 		switch($type)
 		{
     		case 'image/bmp': $path = $directory['preview'] .$filename .'.bmp'; imagewbmp($image_preview, $path); break;
-    		case 'image/gif': $path = $directory['preview'] .$filename .'.gif'; imagegif($image_preview,  $path); break;
+    		case 'image/gif': $path = $directory['preview'] .$filename .'.gif'; $image->writeImages($path, true); break;
     		case 'image/jpeg': $path = $directory['preview'] .$filename .'.jpg'; imagejpeg($image_preview,  $path); break;
     		case 'image/png': $path = $directory['preview'] .$filename .'.png'; imagepng($image_preview,  $path); break;
   		}
