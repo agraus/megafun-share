@@ -29,6 +29,7 @@ CREATE TABLE `megafun` (
   `path` varchar(100) NOT NULL,
   `preview_path` varchar(100) DEFAULT NULL,
   `mime_type` varchar(80) NOT NULL,
+  `size` double NOT NULL,
   `metadata` json DEFAULT NULL,
   `commentary` text,
   `upload_date` timestamp NOT NULL,
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-07 13:42:29
+-- Dump completed on 2018-10-12 17:34:44
