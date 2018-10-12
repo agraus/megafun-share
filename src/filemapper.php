@@ -30,13 +30,22 @@ class FileMapper
 			`path`,
 			preview_path, 
 			mime_type,
+			size,
 			metadata,
 			commentary, 
 			upload_date
 			)
-			VALUES(?,?,?,?,?,?,?,CURRENT_TIMESTAMP())"
+			VALUES(?,?,?,?,?,?,?,?,CURRENT_TIMESTAMP())"
 			);
-		$stmt -> bind_param('sssssss', $properties['name'], $properties['new_name'], $directory['file'],$directory['preview'], $properties['type'], $metadata, $properties['commentary']);
+		$stmt -> bind_param('sssssdss',
+			 $properties['name'],
+			 $properties['new_name'],
+			 $directory['file'], 
+			 $directory['preview'],
+			 $properties['type'],
+			 round($properties['size']/1048576, 2),
+			 $metadata,
+			 $properties['commentary']);
 		$stmt -> execute();
 		$this -> mysqli -> close();
 	}
@@ -46,7 +55,7 @@ class FileMapper
 		$stmt = $this -> mysqli -> prepare("SELECT * FROM megafun WHERE " .$column ." LIKE ? ORDER BY file_id DESC");
 		$stmt -> bind_param('s', $needle);
 		$stmt -> execute();
-		$stmt->bind_result($col1, $col2, $col3 ,$col4 , $col5, $col6, $col7, $col8, $col9);
+		$stmt->bind_result($col1, $col2, $col3 ,$col4 , $col5, $col6, $col7, $col8, $col9, $col10);
 		$properties = [];
 		while($stmt -> fetch())
 		{
@@ -57,9 +66,10 @@ class FileMapper
 				'path' => $col4,
 				'preview_path' => $col5,
 				'mime_type' => $col6,
-				'metadata' => json_decode($col7,TRUE),
-				'commentary' => $col8,
-				'timestamp' => $col9
+				'size' => $col7,
+				'metadata' => json_decode($col8,TRUE),
+				'commentary' => $col9,
+				'timestamp' => $col10
 			];
 		}
 		/* Преобразование массива-враппера, полученного из JSON
