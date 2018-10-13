@@ -67,13 +67,6 @@ label {
     margin-bottom: 1em;
 }
 
-.pure-form input[file] {
-    border: 2px solid #ddd;
-    box-shadow: none;
-    font-size: 100%;
-    width: 60%;
-    margin-bottom: 1em;
-}
 /*
  * -- PURE BUTTON STYLES --
  * I want my pure-button elements to look a little different
@@ -218,6 +211,7 @@ a.pure-button-primary {
     color: #00AE52;
 }
 .splash-subhead-error {
+    margin-top: 20px;
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 0.05em;
@@ -353,4 +347,20 @@ a.pure-button-primary {
         border: none;
     }
 
+}
+
+.pure-form input[type="file"] {
+    display: none;
+}
+.pure-form label {
+    background: #00AE52;
+    text-transform: none;
+    border-radius: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
