@@ -3,7 +3,7 @@
 
 class FileMapper
 {
-	private $dbinfo =  __DIR__ . "/../dbinfo_real.ini" ;
+	private $dbinfo =  __DIR__ . "/../dbinfo.ini" ;
 	private $mysqli;
 	private function dbConnect()
 	{

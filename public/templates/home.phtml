@@ -66,7 +66,7 @@
 <? elseif(isset($data['success'])): ?>
 	<div class="splash-container">
     	<div class="splash">
-        	<h1 class="splash-head-success">File <?= $data['success']['name'] ?> was successfully uploaded</h1>
+        	<h1 class="splash-head-success">File <?= htmlspecialchars($data['success']['name']) ?> was successfully uploaded</h1>
         	<p class="splash-subhead">
         	    Redirecting to the file page
         	</p>
@@ -85,16 +85,14 @@
     	<div class="splash">
     		<img src="images/MegaFun.png" class="pure-image">
 			<form action="<?php $_SERVER['PHP_SELF']?>" enctype="multipart/form-data" method="POST" class="pure-form">
-    	  		<!--<h1 class="splash-head">Upload your file:</h1>-->
     	  		<? if(isset($data['error'][0])): ?>
 					<span class = "splash-subhead-error"><?= htmlspecialchars($data['error'][0]) ?></span>
 					<br>
 				<? endif; ?>
 				<label for="file-upload">
-    				<i class="fa fa-cloud-upload"></i> Upload up to 50mb
+    				<i class="fa fa-cloud-upload"></i> Select file up to 50mb
 				</label>
 				<input type="file" id="file-upload" name="file">
-				<!--<input type="file" name="file">-->
 				<br>
 				<span class = "splash-subhead">Commentary:</span>
 				<br>
