@@ -292,3 +292,9 @@ a.pure-button-primary {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.filename {
+    display: none;
+    word-break: break-all;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
